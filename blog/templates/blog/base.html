@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link href="{% static "css/blog.css" %}?{% now "U" %}" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        
+            <div id="sidebar">
+                <h2>My blog</h2>
+                <p>welcome to my blog.</p>
+            </div>
+        </div>
+        <footer class="blog-footer">here is the footer</footer>
+    </body>
+
+</html>
