@@ -6,22 +6,42 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <link href="{% static "css/blog.css" %}?{% now "U" %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body>
-        <div class="wrapper">
-            <div id="content">
-                {% block content %}
-                {% endblock %}
+        <div class="container">
+            <div class="wrapper">
+                <div class="nav-text">
+                    <a href="{% url 'blog:published_posts' %}"><h1>My Blog</h1>
+                </div></a>
+
+                <div id="content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                
+                <div id="sidebar">
+                    <h2>My blog</h2>
+                    <p>welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.welcome to my blog.
+                    welcome to my blog.welcome to my blog.welcome to my blog.
+                    </p>
+                </div>
             </div>
-        
-            <div id="sidebar">
-                <h2>My blog</h2>
-                <p>welcome to my blog.</p>
+            <div class="footer-div">
+                <footer class="blog-footer">here is the footer</footer>
             </div>
         </div>
-        <footer class="blog-footer">here is the footer</footer>
     </body>
 
 </html>

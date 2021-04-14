@@ -13,6 +13,87 @@ a {
     color:darkturquoise;
 }
 
+
+
+.blog-footer {
+    background-color: black;
+    color: whitesmoke;
+    height: 100px;
+}
+
+.contents-detail {
+    display: flex;
+    flex-flow: column wrap;
+    
+    margin: 10px 5px;
+    padding: 5px 10px
+}
+
+.nav-text {
+    margin: 0 6px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid grey;
+}
+
+
+
+#sidebar {
+    margin: 15px 0px;
+}
+
+.send-btn {
+    background-color:darkturquoise;
+    color:black;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.form-p  {
+    margin: 0px 0px;
+}
+
+.form-p label {
+    display: flex;
+    width: 100px;
+}
+
+.form-p input {
+    padding: 5px;
+}
+
+
+.form-p li {
+    list-style: none;
+    margin: 10px 0px;
+}
+
+.details-body {
+    margin-bottom: 20px;
+}
+
+.icon-divs div {
+    margin: 15px 0px;
+}
+
+.icon-divs div i {
+    width: 50px;
+}
+
+.share-share a {
+    display: inline-flex;
+    align-items: center;
+}
+
+.comment-post a{
+    display: inline-flex;
+    align-items: center;
+}
+
+
+/************************** List.html css **************************/
+
 .main-contents {
     display: flex;
     flex-flow: column wrap;
@@ -21,29 +102,13 @@ a {
     padding: 5px 10px;
 }
 
-.contents-detail {
+.items {
     display: flex;
-    flex-flow: column wrap;
-    border: 1px dotted darkgoldenrod;
-    margin: 10px 5px;
-    padding: 5px 10px
+    flex-flow: wrap;
+    align-items: center;
+    gap:10px;
 }
-
-.nav-text {
-    margin: 8px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid grey;    
-}
-
-.blog-footer {
-    background-color: black;
-    color: whitesmoke;
-    height: 100px;
-}
-
-#sidebar {
-    margin: 15px 0px;
-}
+/************************* List.html css ***************************/
 
 
 @media screen and (min-width: 380px) {
@@ -53,35 +118,50 @@ a {
     
 }
 
-.items {
-    display: flex;
-    flex-flow: wrap;
-    align-items: center;
-    gap:10px;
-}
 
-
+/************************* Laptop screens ***************************/
 @media screen and (min-width: 600px) {
 
     .wrapper {
         display:grid;
-        grid-template-columns: 1fr 200px;
-        grid-template-rows: auto;
+        grid-template-columns: 1fr 25%;
+        grid-template-rows: auto 1fr;
         gap: 10px;
         padding: 10px;
     }
 
-    .main-contents {
+    #content {
         grid-column: 1;
-        grid-row: 1;
+        grid-row: 2;
+        
     }
 
     #sidebar {
         grid-column: 2;
-        grid-row: 1;
+        grid-row: 1 / span 2;
         text-align: center;
         margin: 0;
         background-color:whitesmoke;
+        padding: 5px;
+    }
+
+    .nav-text {
+        grid-column: 1;
+        grid-row: 1;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        background-color: grey;
+    }
+
+    .main-contents {
+        background-color: navajowhite;
+    }
+
+    textarea {
+        width: 400px;
+        height: 180px;
     }
     
 }
+/************************* Laptop screens ***************************/
