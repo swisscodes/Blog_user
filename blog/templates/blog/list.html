@@ -3,15 +3,31 @@
 {% block title %}My Blog{% endblock %}
 
 {% block content %}
-{% for post in posts %}
-<div class="main-contents">
-    <div class="items">
-        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-        <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
+    {% if tag %}
+        <h2>Posts tagged with "{{ tag.name }}"</h2>
+    {% endif %}
+
+    {% for post in posts %}
+    <div class="main-contents">
+        <div class="items">
+            <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+        </div>
+        <div class="items-body">
+        {{ post.body|truncatewords:30|linebreaks }}
+        </div>
+        <div><p class="date">Published <small>{{ post.publish }} by {{ post.author }}</p></small></div>
+        <div>
+            <p class="tags">
+                Tags:{% for tag in post.tags.all %}
+                <a href="{% url "blog:post_list_by_tag" tag.slug %}">
+                {{ tag.name }}
+                </a>
+                {% if not forloop.last %} | {% endif %}
+                {% endfor %}
+            </p>
+        </div>
     </div>
-    <div class="items-body">{{ post.body|truncatewords:30|linebreaks }}</div>
-</div>
-{% endfor %}
-{% include "blog/pagination.html" with page=page_obj %}
+    {% endfor %}
+    <div>{% include "blog/pagination.html" with page=posts %}</div>
 
 {% endblock content %}

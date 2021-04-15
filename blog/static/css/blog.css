@@ -91,6 +91,9 @@ a {
     align-items: center;
 }
 
+.similar-post {
+    margin-bottom: 10px;
+}
 
 /************************** List.html css **************************/
 
@@ -100,6 +103,14 @@ a {
     border: 1px solid darkgoldenrod;
     margin: 10px 5px;
     padding: 5px 10px;
+}
+
+.main-contents div {
+    margin-bottom: 10px;
+}
+
+.main-contents div:last-child {
+    margin-bottom: 0px;
 }
 
 .items {
@@ -143,6 +154,7 @@ a {
         margin: 0;
         background-color:whitesmoke;
         padding: 5px;
+        height: fit-content;
     }
 
     .nav-text {

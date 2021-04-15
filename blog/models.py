@@ -4,7 +4,7 @@ from django.db.models.fields import related
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
-
+from taggit.managers import TaggableManager
 
 
 #class PublishedManager(models.Manager):
@@ -41,6 +41,13 @@ class Post(models.Model):
         default='draft')
 
 
+    class Meta:
+        ordering = ('-publish',)
+
+    def __str__(self):
+        return self.title
+
+    
     def get_published():
         return Post.objects.all().filter(status='published')
 
@@ -52,13 +59,10 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:published_post_detail', args=[self.slug, self.publish.year,\
             self.publish.month, self.publish.day])
+    
+    tags = TaggableManager()
 
 
-    class Meta:
-        ordering = ('-publish',)
-
-    def __str__(self):
-        return self.title
 
 
 
