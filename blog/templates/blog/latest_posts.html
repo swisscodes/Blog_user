@@ -1,0 +1,5 @@
+{% for post in latest_posts %}
+    <div class="main-contents">
+        <a href="{{ post.get_absolute_url }}">{{ post }}</a>
+    </div>
+{% endfor %}

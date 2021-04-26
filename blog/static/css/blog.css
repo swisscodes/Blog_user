@@ -13,6 +13,13 @@ a {
     color:darkturquoise;
 }
 
+a:hover {
+    color: coral;
+}
+
+a:active {
+    color: #00ffff;
+}
 
 
 .blog-footer {

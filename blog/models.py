@@ -1,10 +1,11 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.db.models.fields import related
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from taggit.managers import TaggableManager
+import datetime
+
 
 
 #class PublishedManager(models.Manager):
@@ -39,6 +40,7 @@ class Post(models.Model):
     status = models.CharField(max_length=10,
         choices=STATUS_CHOICES,
         default='draft')
+    tags = TaggableManager()
 
 
     class Meta:
@@ -55,12 +57,16 @@ class Post(models.Model):
     def activePost(self):
         return self.comments.all().filter(active=True)
 
+    
+    def daily_post():
+        post_in_24hrs = Post.get_published().filter(created__gt = datetime.datetime.now()- datetime.timedelta(hours = 24))
+        for post in post_in_24hrs:
+         return post 
+
 
     def get_absolute_url(self):
         return reverse('blog:published_post_detail', args=[self.slug, self.publish.year,\
             self.publish.month, self.publish.day])
-    
-    tags = TaggableManager()
 
 
 

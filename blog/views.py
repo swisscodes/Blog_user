@@ -43,8 +43,13 @@ def post_detail(request, slug, year, month, day):
             new_comment.save()
     else:
         comment_form = CommentForm()
-
+    #1. You retrieve a Python list of IDs for the tags of the current post. 
+    # The values_list() QuerySet returns tuples with the values for the given fields. You
+    #pass flat=True to it to get single values such as [1, 2, 3, ...] instead
+    # of one-tuples such as [(1,), (2,), (3,) ...].
     post_tags_ids = post.tags.values_list('id', flat=True)
+    ################Incase i need to use again ########################
+
     similar_posts = Post.get_published().filter(tags__in=post_tags_ids)\
         .exclude(id=post.id)
     similar_posts = similar_posts.annotate\
