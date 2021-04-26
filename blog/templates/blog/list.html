@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 
 {% block title %}My Blog{% endblock %}
 
@@ -13,7 +14,7 @@
             <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
         </div>
         <div class="items-body">
-        {{ post.body|truncatewords:30|linebreaks }}
+        {{ post.body|markdown_tag|truncatewords_html:30 }}
         </div>
         <div><p class="date">Published <small>{{ post.publish }} by {{ post.author }}</p></small></div>
         <div>

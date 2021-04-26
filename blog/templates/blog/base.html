@@ -28,6 +28,20 @@
                     <h2>My blog</h2>
                    <h3>Latest posts</h3>
                    {% show_latest_posts 3 %}
+
+                   <h3>Most commented posts</h3>
+                   <!--Here we calling the custom template and setting the returned
+                   value to a varaible
+                   {% get_most_commented_posts 3 as most_commented_posts %}
+                   -->
+                   {% get_most_commented_posts 3 as most_commented_posts %}
+                     {% for post in most_commented_posts %}
+                      {% if post.total_comments > 1 %}
+                        <div class="main-contents comment-div">
+                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        </div>
+                      {% endif %}
+                     {% endfor %}
                 
                 <p>This is my blog. I've written {% total_post %} posts so far.</p>
                     

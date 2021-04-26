@@ -4,9 +4,9 @@
     box-sizing: border-box;
 }
 
-/* #content {
+#content ul {
+    list-style: none;
 }
-*/
 
 a {
     text-decoration: none;
@@ -102,6 +102,7 @@ a:active {
     margin-bottom: 10px;
 }
 
+
 /************************** List.html css **************************/
 
 .main-contents {
@@ -170,7 +171,7 @@ a:active {
         display:flex;
         justify-content: center;
         align-items: center;
-        background-color: grey;
+        background-color: darkslategrey;
     }
 
     .main-contents {
@@ -180,6 +181,10 @@ a:active {
     textarea {
         width: 400px;
         height: 180px;
+    }
+
+    .comment-div {
+        background-color: darkslategrey;
     }
     
 }
