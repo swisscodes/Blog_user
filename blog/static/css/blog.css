@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.wrapper {
+    min-height: 100vh;
+}
+
 #content ul {
     list-style: none;
 }
@@ -23,7 +27,7 @@ a:active {
 
 
 .blog-footer {
-    background-color: black;
+    background-color: darkslategrey;
     color: whitesmoke;
     height: 100px;
 }
@@ -55,6 +59,7 @@ a:active {
     height: 35px;
     border-radius: 5px;
     font-weight: bold;
+    margin-top: 6px;
 }
 
 .form-p  {
@@ -169,9 +174,21 @@ a:active {
         grid-column: 1;
         grid-row: 1;
         display:flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         background-color: darkslategrey;
+        padding: 8px;
+    }
+
+    .nav-user {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        
+    }
+
+    .nav-user * {
+        color:darkturquoise;
     }
 
     .main-contents {

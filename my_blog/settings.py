@@ -27,10 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
 INSTALLED_APPS = [
+    'account',
+    # for accounts login logout we have to put it on top so django found ours first
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,8 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #django apps activated by me
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+
     # 3rd party apps
     'taggit',
+
+    #Database app
+    'django.contrib.postgres',
 
     #my installed apps
     'blog',
@@ -83,9 +93,11 @@ WSGI_APPLICATION = 'my_blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'swiss_blog',
+        'USER': 'swissbobo',
+        'PASSWORD': 'Bar77ton',
+        }
 }
 
 
@@ -140,3 +152,9 @@ EMAIL_HOST_PASSWORD = 'zvkjojbucanqtyoq'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'webmaster@ok.com'
+
+
+
+
+LOGIN_REDIRECT_URL = 'blog:published_posts'
+LOGIN_URL = 'account:login'

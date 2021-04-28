@@ -5,6 +5,7 @@ from django.db.models import Count
 from django.utils.safestring import mark_safe
 import markdown
 
+
 register = template.Library()
 
 #simple_tag: Processes the data and returns a string

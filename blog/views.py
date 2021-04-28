@@ -1,15 +1,17 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import ListView
-from .forms import EmailPostForm, CommentForm
+#from django.views.generic import ListView #not in use for now#
+from .forms import EmailPostForm, CommentForm, SearchForm
 from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Count
+from django.contrib.postgres.search import TrigramSimilarity
 
 
 # Create your views here.
-
+@login_required
 def post_list(request, tag_slug=None):
     post_items = Post.get_published()
     tag = None
@@ -30,6 +32,7 @@ def post_list(request, tag_slug=None):
     return render(request, 'blog/list.html', context)
 
 
+@login_required
 def post_detail(request, slug, year, month, day):
     post = get_object_or_404(Post, slug=slug, status='published', publish__year=year,\
         publish__month=month, publish__day=day)
@@ -71,7 +74,7 @@ def post_detail(request, slug, year, month, day):
 """
 
 
-
+@login_required
 def post_share(request, post_id):
     post = get_object_or_404(Post, id=post_id, status='published')
     sent = False
@@ -93,7 +96,7 @@ def post_share(request, post_id):
     return render(request, 'blog/share.html', context)
 
 
-
+@login_required
 def comment_view(request, post_id):
     post = get_object_or_404(Post, id=post_id, status='published')
     ok = Comment.allComments() #Total numbers of all Comments
@@ -118,3 +121,21 @@ def comment_view(request, post_id):
         form = CommentForm()
     context = {'form': form, 'post': post, 'comments': comments, 'new_comment': new_comment, 'ok': ok}
     return render(request, 'blog/comments.html', context)
+
+
+@login_required
+def post_search(request, query=None):
+    form = SearchForm()
+    results = []
+    if('query' in request.GET):
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Post.get_published().annotate(similarity=TrigramSimilarity\
+                ('title', query),).filter(similarity__gt=0.1).order_by('-similarity')
+    context = {'form': form, 'query': query,'results': results}
+    return render(request, 'blog/search.html', context)
+    #In order to use trigrams in PostgreSQL, you will need to install the pg_trgm
+    # extension first. Execute the following command from the shell to connect to your
+    # database: psql blog Then, execute the following command to install
+    # the pg_trgm extension: CREATE EXTENSION pg_trgm;
