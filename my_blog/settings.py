@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
+import django_heroku
 from environs import Env
 env = Env() # new
 env.read_env() # new
@@ -108,7 +108,7 @@ if DEBUG:
     }
 else:
     DATABASES = {
-    'default': dj_database_url.config(default='postgres://kkydurgwxboecy:ccf534e1f229d1606c376b26b9243a6de4d4799938d81efa6b2182b73e1726a0@ec2-54-163-254-204.compute-1.amazonaws.com:5432/da2e4i650vfk7l')
+    "default": env.dj_db_url("DATABASE_URL")
 }
 
 
@@ -187,3 +187,7 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE =True
     SECURE_SSL_REDIRECT =True
+
+
+
+django_heroku.settings(locals())
