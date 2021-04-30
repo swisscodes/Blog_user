@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from environs import Env
+env = Env() # new
+env.read_env() # new
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p%yw_1$!(v*er9te%yw(8msu_s&+y(1aku=hzlhiid*q3)m%_v'
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 SITE_ID = 1
 
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',   # whitenoise
     'django.contrib.staticfiles',
 
     #django apps activated by me
@@ -59,6 +63,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # whitenoise middleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -91,13 +96,18 @@ WSGI_APPLICATION = 'my_blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'swiss_blog',
-        'USER': 'swissbobo',
-        'PASSWORD': 'Bar77ton',
-        }
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'swiss_blog',
+            'USER': env.str('DBUSER'),
+            'PASSWORD': env.str('DBPASSWORD'),
+            }
+    }
+else:
+    DATABASES = {
+    "default": env.dj_db_url("DATABASE_URL")
 }
 
 
@@ -138,6 +148,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))] # new
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles')) # new
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+MEDIA_URL  = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -147,8 +165,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'swissbobo@gmail.com'
-EMAIL_HOST_PASSWORD = 'zvkjojbucanqtyoq'
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'webmaster@ok.com'
@@ -158,3 +176,12 @@ DEFAULT_FROM_EMAIL = 'webmaster@ok.com'
 
 LOGIN_REDIRECT_URL = 'blog:published_posts'
 LOGIN_URL = 'account:login'
+
+
+
+
+# HTTPS SETTINGS
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE =True
+    SECURE_SSL_REDIRECT =True

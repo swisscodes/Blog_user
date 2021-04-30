@@ -15,6 +15,10 @@ class UserRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'email')
+        
+        help_texts = {
+            'username': ('Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        }
 
     
     def clean_password2(self):

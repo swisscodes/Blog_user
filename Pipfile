@@ -8,6 +8,9 @@ django = "*"
 django-taggit = "*"
 markdown = "*"
 psycopg2 = "*"
+environs = "*"
+whitenoise = "*"
+gunicorn = "*"
 
 [dev-packages]
 
