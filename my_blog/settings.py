@@ -109,7 +109,8 @@ if DEBUG:
 else:
     #PRODUCTION DATABSE SETTINGS
     DATABASES = {
-    'default': dj_database_url.config(default='postgres://rtuwcebhghrnea:bffa1a758490f99e8b6d79ae15f7f012676f9e93e00e966282611b4e39e7c229@ec2-52-21-252-142.compute-1.amazonaws.com:5432/d9majp8rkc4jjp')
+        'ENGINE': 'django.db.backends.postgresql',
+        'default': dj_database_url.config(default='postgres://rtuwcebhghrnea:bffa1a758490f99e8b6d79ae15f7f012676f9e93e00e966282611b4e39e7c229@ec2-52-21-252-142.compute-1.amazonaws.com:5432/d9majp8rkc4jjp')
 }
 
 
