@@ -1,14 +1,15 @@
 from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #from django.views.generic import ListView #not in use for now#
-from .forms import EmailPostForm, CommentForm, SearchForm
+from .forms import EmailPostForm, CommentForm, SearchForm, UserPostForm
 from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.postgres.search import TrigramSimilarity
-
+from django.utils.text import slugify
 
 # Create your views here.
 @login_required
@@ -139,3 +140,23 @@ def post_search(request, query=None):
     # extension first. Execute the following command from the shell to connect to your
     # database: psql blog Then, execute the following command to install
     # the pg_trgm extension: CREATE EXTENSION pg_trgm;
+
+
+@login_required
+def createpost(request, obj_id=None):
+    post=None
+    if obj_id:
+        post = get_object_or_404(Post, id=obj_id)
+    if(request.method=="POST"):
+        create_form = UserPostForm(request.POST, instance=post)
+        if(create_form.is_valid()):
+            new_post_obj = create_form.save(commit=False)
+            new_post_obj.author = request.user
+            new_post_obj.slug = slugify(new_post_obj.title)
+            new_post_obj.save()
+            create_form.save_m2m()
+            return HttpResponseRedirect(new_post_obj.get_absolute_url())
+            
+    create_form = UserPostForm(instance = post)
+    context = {'create_form': create_form, 'post': post}
+    return render(request, 'blog/new_post.html', context)

@@ -21,6 +21,6 @@
 <form method="post">
     {% csrf_token %}
     <div class="form-p">{{ form.as_p }}</div>
-    <p><input  class="send-btn" type="submit" value="Add comment"></p>
+    <p><input  class="send-btn" type="submit" name="action" value="Add comment"></p>
 </form>
 {% endblock content %}

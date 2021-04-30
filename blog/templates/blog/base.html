@@ -40,8 +40,8 @@
                 {% if request.user.is_authenticated %}
                     <form action="{% url 'blog:post_search' %}" method="GET">
                         {% csrf_token %}
-                        <input type="text" name="query" required>
-                        <input type="submit" value="Search">
+                        <input class="input-text" type="text" name="query" required>
+                        <input class="send-btn" type="submit" value="Search">
                     </form>
                 {% endif %}
               </div>
@@ -55,6 +55,7 @@
               <div id="sidebar">
                  {% if request.user.is_authenticated %}
                     <h2>My blog</h2>
+                      <a href="{% url "blog:create_post" %}"><button class="send-btn" name="action" value="edit_form" type="submit">Create Post</button></a>
                    <h3>Latest posts</h3>
                    {% show_latest_posts 3 %}
 

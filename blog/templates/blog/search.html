@@ -24,8 +24,8 @@
     <h1>Search for posts</h1>
     <form method="get">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Search">
+        <div class="form-p">{{ form.as_p }}</div>
+        <input class="send-btn" type="submit" value="Search">
     </form>
   {% endif %}
 

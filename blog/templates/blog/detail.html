@@ -6,10 +6,15 @@
 {% block content %}
 
 <div class="contents-detail">
+<div class="main-contents">
     <div class="details-body">
         <h1>{{ post.title }}</h1>
         <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
         {{ post.body|markdown_tag }}
+        {% if request.user == post.author %}
+          <a href="{% url "blog:edit_post" post.id %}"><button class="send-btn" name="action" value="edit_form" type="submit">Edit</button></a>
+        {% endif %}
+    </div>
     </div>
     
     <div class="similar-post">
@@ -60,7 +65,7 @@
                     <form method="post">
                         <div class="form-p">{{ comment_form.as_p }}</div>
                         {% csrf_token %}
-                        <p><input  class="send-btn" type="submit" value="Add comment"></p>
+                        <p><input  class="send-btn" type="submit" name="action" value="Add comment"></p>
                     </form>
                 {% endif %}
             </div>

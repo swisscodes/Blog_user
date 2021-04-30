@@ -1,5 +1,6 @@
 from django import forms
-from .models import Comment
+from .models import Comment, Post
+from django.contrib.admin.widgets import AdminSplitDateTime
 
 
 class EmailPostForm(forms.Form):
@@ -21,3 +22,10 @@ class CommentForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     query = forms.CharField()
+
+
+
+class UserPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'body', 'status', 'tags')

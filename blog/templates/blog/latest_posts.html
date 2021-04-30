@@ -2,4 +2,8 @@
     <div class="main-contents comment-div">
         <a href="{{ post.get_absolute_url }}">{{ post }}</a>
     </div>
+{% empty %}
+    <div class="main-contents comment-div">
+        <p>No new post in last 24hours</p>
+    </div>
 {% endfor %}

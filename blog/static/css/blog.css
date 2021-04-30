@@ -55,11 +55,12 @@ a:active {
 .send-btn {
     background-color:darkturquoise;
     color:black;
-    width: 100px;
-    height: 35px;
+    width: fit-content;
+    height: fit-content;
     border-radius: 5px;
     font-weight: bold;
     margin-top: 6px;
+    padding: 10px;
 }
 
 .form-p  {
@@ -202,6 +203,11 @@ a:active {
 
     .comment-div {
         background-color: darkslategrey;
+    }
+
+    .input-text {
+        height: 33px;
+        
     }
     
 }
