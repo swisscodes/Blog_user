@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
 from environs import Env
 env = Env() # new
 env.read_env() # new
@@ -187,7 +186,3 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE =True
     SECURE_SSL_REDIRECT =True
-
-
-
-django_heroku.settings(locals())
