@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from environs import Env
+import dj_database_url
 env = Env() # new
 env.read_env() # new
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -107,8 +108,7 @@ if DEBUG:
     }
 else:
     DATABASES = {
-        "default": env.dj_db_url("DATABASE_URL")
-}
+        'defualt': dj_database_url.config(default='postgres://localhost')}
 
 
 
