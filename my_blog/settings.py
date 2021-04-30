@@ -108,8 +108,11 @@ if DEBUG:
     }
 else:
     DATABASES = {
-    "default": dj_database_url.config(default='postgres://kkydurgwxboecy:ccf534e1f229d1606c376b26b9243a6de4d4799938d81efa6b2182b73e1726a0@ec2-54-163-254-204.compute-1.amazonaws.com:5432/da2e4i650vfk7l')
+    "default": env.dj_db_url("DATABASE_URL")
 }
+    #DATABASES = {
+    #"default": dj_database_url.config(default='postgres://kkydurgwxboecy:ccf534e1f229d1606c376b26b9243a6de4d4799938d81efa6b2182b73e1726a0@ec2-54-163-254-204.compute-1.amazonaws.com:5432/da2e4i650vfk7l')
+#}
 
 
 
