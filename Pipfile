@@ -8,7 +8,7 @@ django = "*"
 django-taggit = "*"
 markdown = "*"
 psycopg2 = "*"
-environs = "*"
+environs = {extras = ["django"], version = "*"}
 whitenoise = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
