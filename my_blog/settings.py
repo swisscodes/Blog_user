@@ -110,7 +110,7 @@ if DEBUG == True:
 else:
     #PRODUCTION DATABSE SETTINGS
     DATABASES = {
-        'default': dj_database_url.config(default='postgres://rtuwcebhghrnea:bffa1a758490f99e8b6d79ae15f7f012676f9e93e00e966282611b4e39e7c229@ec2-52-21-252-142.compute-1.amazonaws.com:5432/d9majp8rkc4jjp')
+        'default': dj_database_url.config(default='postgres://jsayohfhepeiko:eefd0b6c02e82f925d994121b7dea774f0320ea6b5621b045ce95aa043987577@ec2-54-87-112-29.compute-1.amazonaws.com:5432/dfl7ldl1g1qkh9')
 }
 
 
