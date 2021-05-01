@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 from environs import Env
 env = Env() # new
 env.read_env() # new
@@ -97,13 +98,19 @@ WSGI_APPLICATION = 'my_blog.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'swiss_blog',
-        'USER': env.str('DBUSER'),
-        'PASSWORD': env.str('DBPASSWORD'),
+if DEBUG == True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'swiss_blog',
+            'USER': env.str('DBUSER'),
+            'PASSWORD': env.str('DBPASSWORD'),
          }
+}
+else:
+    #PRODUCTION DATABSE SETTINGS
+    DATABASES = {
+        'default': dj_database_url.config(default='postgres://rtuwcebhghrnea:bffa1a758490f99e8b6d79ae15f7f012676f9e93e00e966282611b4e39e7c229@ec2-52-21-252-142.compute-1.amazonaws.com:5432/d9majp8rkc4jjp')
 }
 
 
