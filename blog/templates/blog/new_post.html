@@ -3,13 +3,13 @@
 
 {% block content %}
     {% if post %}
-    <form action="" method="POST">
-    {% csrf_token %}
+        <form action="" method="POST">
+        {% csrf_token %}
 
-    <div class="form-p">{{ create_form.as_p }}</div>
+        <div class="form-p">{{ create_form.as_p }}</div>
 
-    <input class="send-btn" type="submit" name="action" value="Save post">
-    </form>
+        <input class="send-btn" type="submit" name="action" value="Save post">
+        </form>
     {% else %}
         <form action="" method="POST">
         {% csrf_token %}

@@ -16,7 +16,8 @@ urlpatterns = [
     path('tag/<slug:tag_slug>/', post_list, name='post_list_by_tag'),
     path('feed/', LatestPostsFeed(), name='post_feed'),
     path('search/', post_search, name='post_search'),
-    path('create/<int:obj_id>', createpost, name='edit_post'),
     path('create/', createpost, name='create_post'),
+    path('edit/<int:obj_id>', createpost, name='edit_post'),
+    path('delete/<int:obj_id>', createpost, name='delete_post'),
 
 ]

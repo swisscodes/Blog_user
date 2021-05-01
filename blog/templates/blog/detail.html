@@ -12,7 +12,10 @@
         <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
         {{ post.body|markdown_tag }}
         {% if request.user == post.author %}
-          <a href="{% url "blog:edit_post" post.id %}"><button class="send-btn" name="action" value="edit_form" type="submit">Edit</button></a>
+        <form action="{% url "blog:edit_post" post.id %}" method="GET">
+          <button class="send-btn" name="action" value="edit_form" type="submit">Edit</button>
+          <button class="send-btn" name="action" value="delete" type="submit">Delete</button>
+        </form>
         {% endif %}
     </div>
     </div>

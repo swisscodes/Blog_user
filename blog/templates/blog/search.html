@@ -22,7 +22,7 @@
     <p><a href="{% url "blog:post_search" %}">Search again</a></p>
   {% else %}
     <h1>Search for posts</h1>
-    <form method="get">
+    <form method="GET">
         {% csrf_token %}
         <div class="form-p">{{ form.as_p }}</div>
         <input class="send-btn" type="submit" value="Search">

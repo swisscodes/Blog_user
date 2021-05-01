@@ -147,7 +147,7 @@ def createpost(request, obj_id=None):
     post=None
     if obj_id:
         post = get_object_or_404(Post, id=obj_id)
-    if(request.method=="POST"):
+    if((request.method=="POST") and ((request.POST['action']=="Create post") or (request.POST['action']=="Save post"))):
         create_form = UserPostForm(request.POST, instance=post)
         if(create_form.is_valid()):
             new_post_obj = create_form.save(commit=False)
@@ -156,7 +156,23 @@ def createpost(request, obj_id=None):
             new_post_obj.save()
             create_form.save_m2m()
             return HttpResponseRedirect(new_post_obj.get_absolute_url())
-            
+    elif(request.method=='POST'):
+        post.delete()
+        posts = Post.get_published()
+        paginator = Paginator(posts, 3) # 3 posts per page
+        page = request.GET.get('page')
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        context = {'page': page, 'posts': posts}
+        return render(request, 'blog/list.html', context)
+
+    if(request.method=="GET" and request.GET['action']=="delete"):
+        context = {'post':post}
+        return render(request, 'blog/delete.html', context)
     create_form = UserPostForm(instance = post)
     context = {'create_form': create_form, 'post': post}
     return render(request, 'blog/new_post.html', context)
