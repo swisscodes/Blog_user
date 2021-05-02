@@ -142,6 +142,7 @@ def post_search(request, query=None):
     # the pg_trgm extension: CREATE EXTENSION pg_trgm;
 
 
+
 @login_required
 def createpost(request, obj_id=None):
     post=None
