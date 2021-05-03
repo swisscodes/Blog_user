@@ -95,22 +95,22 @@ WSGI_APPLICATION = "my_blog.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-if DEBUG == True:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "swiss_blog",
-            "USER": env.str("DBUSER"),
-            "PASSWORD": env.str("DBPASSWORD"),
-        }
-    }
-else:
-    # PRODUCTION DATABSE SETTINGS
-    DATABASES = {
-        "default": dj_database_url.config(
-            default="postgres://ycewqxetkzznqa:47cb8fd478d6ed076d5bdbaa93f04f443c79b164e8c897324f112ecf26d3b663@ec2-23-22-191-232.compute-1.amazonaws.com:5432/dd9esesu3ad0gv"
-        )
-    }
+# if DEBUG == True:
+# DATABASES = {
+# "default": {
+# "ENGINE": "django.db.backends.postgresql",
+# "NAME": "swiss_blog",
+# "USER": env.str("DBUSER"),
+# "PASSWORD": env.str("DBPASSWORD"),
+# }
+# }
+# else:
+# PRODUCTION DATABSE SETTINGS
+DATABASES = {
+    "default": dj_database_url.config(
+        default="postgres://ycewqxetkzznqa:47cb8fd478d6ed076d5bdbaa93f04f443c79b164e8c897324f112ecf26d3b663@ec2-23-22-191-232.compute-1.amazonaws.com:5432/dd9esesu3ad0gv"
+    )
+}
 
 
 # Password validation
