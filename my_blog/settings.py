@@ -108,7 +108,7 @@ else:
     # PRODUCTION DATABSE SETTINGS
     DATABASES = {
         "default": dj_database_url.config(
-            default="postgres://idqsatqpvibjuw:82703617777a402af75c921d992cb15f1568a81cf19ca5e36704fc1f5bca3308@ec2-18-214-195-34.compute-1.amazonaws.com:5432/d4eoui5lk5o1i1"
+            default="postgres://bpypghrihzmdui:ace56eb4f879c453d2f69b30f8465455dc894343c486f4ec87d82775f3283f91@ec2-184-73-198-174.compute-1.amazonaws.com:5432/d4ar1tsguf8la8"
         )
     }
 
