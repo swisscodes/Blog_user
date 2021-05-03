@@ -30,6 +30,7 @@ a:active {
     background-color: darkslategrey;
     color: whitesmoke;
     height: 100px;
+    text-align: center;
 }
 
 .contents-detail {
