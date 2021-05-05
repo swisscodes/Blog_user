@@ -88,6 +88,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = "account.CustomUserModel"
+
 WSGI_APPLICATION = "my_blog.wsgi.application"
 
 

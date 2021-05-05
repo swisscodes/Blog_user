@@ -27,10 +27,12 @@ a:active {
 
 
 .blog-footer {
+    display: flex;
     background-color: darkslategrey;
     color: whitesmoke;
     height: 100px;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .contents-detail {
@@ -70,7 +72,8 @@ a:active {
 
 .form-p label {
     display: flex;
-    width: 100px;
+    width:fit-content;
+    margin-bottom: 2px;
 }
 
 .form-p input {
@@ -107,6 +110,10 @@ a:active {
 
 .similar-post {
     margin-bottom: 10px;
+}
+
+.error {
+    color:red;
 }
 
 

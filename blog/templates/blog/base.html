@@ -20,21 +20,21 @@
             {% if request.user.is_authenticated %}
               <a href="{% url "blog:published_posts" %}"><h1>My Blog Blogger</h1></a>
             {% else %}
-             <a href="{% url "account:login" %}"><h1>My Blog Blogger</h1></a>
+             <a href="{% url "account:login1" %}"><h1>My Blog Blogger</h1></a>
             {% endif %}
               <div>
                 <div class="nav-user">
                   <span class="user">
                     {% if request.user.is_authenticated %}
-                      Hello,{% if request.user.first_name %}
-                                {{ request.user.first_name }}
-                            {% else %}
+                      Hello,{% if request.user.username %}
                                 {{ request.user.username }}
+                            {% else %}
+                                {{ request.user.first_name }}
                             {% endif %}
                         </span>
                       <span><a href="{% url "account:logout" %}">Logout</a></span>
                     {% else %}
-                      <a href="{% url "account:login" %}">Log-in</a>
+                      <a href="{% url "account:login1" %}">Log-in</a>
                     {% endif %}
                 </div>
                 {% if request.user.is_authenticated %}
@@ -85,7 +85,7 @@
               
             </div>
             <div class="footer-div">
-                <footer class="blog-footer">here is the footer</footer>
+                <footer class="blog-footer">© {% current_year %} – My Blog ⋅ Privacy Policy</footer>
             </div>
         
         

@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.urls.base import reverse
 from .models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -184,7 +185,8 @@ def createpost(request, obj_id=None):
             return HttpResponseRedirect(new_post_obj.get_absolute_url())
     elif request.method == "POST":
         post.delete()
-        posts = Post.get_published()
+        return HttpResponseRedirect(reverse("blog:published_posts"))
+        """posts = Post.get_published()
         paginator = Paginator(posts, 3)  # 3 posts per page
         page = request.GET.get("page")
         try:
@@ -194,7 +196,7 @@ def createpost(request, obj_id=None):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
         context = {"page": page, "posts": posts}
-        return render(request, "blog/list.html", context)
+        return render(request, "blog/list.html", context)"""
 
     if request.method == "GET" and request.GET["action"] == "delete":
         context = {"post": post}
