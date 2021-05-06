@@ -186,17 +186,6 @@ def createpost(request, obj_id=None):
     elif request.method == "POST":
         post.delete()
         return HttpResponseRedirect(reverse("blog:published_posts"))
-        """posts = Post.get_published()
-        paginator = Paginator(posts, 3)  # 3 posts per page
-        page = request.GET.get("page")
-        try:
-            posts = paginator.page(page)
-        except PageNotAnInteger:
-            posts = paginator.page(1)
-        except EmptyPage:
-            posts = paginator.page(paginator.num_pages)
-        context = {"page": page, "posts": posts}
-        return render(request, "blog/list.html", context)"""
 
     if request.method == "GET" and request.GET["action"] == "delete":
         context = {"post": post}
