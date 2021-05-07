@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
+img {
+    width: 100%;
+}
+
+form button {
+    margin-right: 10px;
+}
+
 .wrapper {
     min-height: 100vh;
 }
@@ -118,7 +126,6 @@ a:active {
 
 
 /************************** List.html css **************************/
-
 .main-contents {
     display: flex;
     flex-flow: column wrap;
@@ -140,6 +147,12 @@ a:active {
     flex-flow: wrap;
     align-items: center;
     gap:10px;
+}
+
+
+.pagination {
+    margin-left: 7px;
+    font-size: 1.3rem;
 }
 /************************* List.html css ***************************/
 
@@ -200,8 +213,34 @@ a:active {
         color:darkturquoise;
     }
 
+    .main-content-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 200px;
+        grid-template-rows: auto;
+    }
+
+    .post-image {
+        grid-column: 2;
+    }
+    .post-image img {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        max-height: 160px;
+        object-fit:contain;
+    }
+
     .main-contents {
         background-color: navajowhite;
+    }
+
+    .wrap-main-body {
+        display: flex;
+        flex-flow: column wrap;
+    }
+
+    .wrap-main-body form {
+        align-self: flex-end;
     }
 
     textarea {
@@ -217,6 +256,16 @@ a:active {
         height: 33px;
         
     }
+
+    .tags {
+        margin-top: 50px;
+    }
     
+    /*************************details page *******************/
+    .detail-form {
+        margin-top: 15px;
+        gap: 20px;
+    }
+    /*************************details page *******************/
 }
 /************************* Laptop screens ***************************/

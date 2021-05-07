@@ -3,7 +3,7 @@
 
 {% block content %}
     {% if post %}
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="form-p">{{ create_form.as_p }}</div>
@@ -11,7 +11,7 @@
         <input class="send-btn" type="submit" name="action" value="Save post">
         </form>
     {% else %}
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-p">{{ create_form.as_p }}</div>
         <input class="send-btn" type="submit" name="action" value="Create post">

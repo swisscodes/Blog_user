@@ -175,7 +175,7 @@ def createpost(request, obj_id=None):
         (request.POST["action"] == "Create post")
         or (request.POST["action"] == "Save post")
     ):
-        create_form = UserPostForm(request.POST, instance=post)
+        create_form = UserPostForm(request.POST, request.FILES, instance=post)
         if create_form.is_valid():
             new_post_obj = create_form.save(commit=False)
             new_post_obj.author = request.user

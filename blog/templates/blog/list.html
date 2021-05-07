@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% load blog_tags %}
+{% load static %}
 
 {% block title %}My Blog{% endblock %}
 
@@ -9,25 +10,36 @@
     {% endif %}
 
     {% for post in posts %}
-    <div class="main-contents">
-        <div class="items">
-            <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-        </div>
-        <div class="items-body">
-        {{ post.body|markdown_tag|truncatewords_html:30 }}
-        </div>
-        <div><p class="date">Published <small>{{ post.publish }} by {{ post.author }}</p></small></div>
-        <div>
-            <p class="tags">
-                Tags:{% for tag in post.tags.all %}
-                <a href="{% url "blog:post_list_by_tag" tag.slug %}">
-                {{ tag.name }}
-                </a>
-                {% if not forloop.last %} | {% endif %}
-                {% endfor %}
-            </p>
-        </div>
-    </div>
+        <div class="main-contents">
+          <div class="main-content-wrapper">
+            <div class="wrap-main-body">
+                <div class="items">
+                    <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                </div>
+                <div class="items-body">
+                {{ post.body|markdown_tag|truncatewords_html:30 }}
+                </div>
+                <div><p class="date">Published <small>{{ post.publish }} by {{ post.author }}</p></small></div>
+                <div>
+                    <p class="tags">Tags:
+                    {% for tag in post.tags.all %}
+                        <a href="{% url "blog:post_list_by_tag" tag.slug %}">
+                        {{ tag.name }}
+                        </a>
+                        {% if not forloop.last %} | {% endif %}
+                    {% endfor %}
+                    </p>
+                </div>
+            </div> <!--CLOSING wrap-main-body-->
+            <div class="post-image">
+            {% if post.image %}
+                <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}"></a>
+            {% else %}
+                <a href="{{ post.get_absolute_url }}"><img src="{% static "images/no-image-png-2.png" %}" alt="no image"></a>
+            {% endif %}
+            </div>
+          </div><!--CLOSING main-content-wrapper-->
+        </div> 
     {% endfor %}
     <div>{% include "blog/pagination.html" with page=posts %}</div>
 

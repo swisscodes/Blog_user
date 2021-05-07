@@ -33,11 +33,9 @@ class Post(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    image = models.ImageField(null=True, blank=True, upload_to="uploads/%Y/%m/%d/")
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="draft")
     tags = TaggableManager()
-
-    # next i need to setup imagefiled for each post.
-    # post_image = models.ImageField(_(""), upload_to=None, height_field=None, width_field=None, max_length=None)
 
     class Meta:
         ordering = ("-publish",)

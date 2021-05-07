@@ -19,7 +19,10 @@ def user_login(request):
             try:
                 user_field = CustomUserModel.objects.get(username=cd["username"])
             except CustomUserModel.DoesNotExist:
-                pass
+                try:
+                    user_field = CustomUserModel.objects.get(email=cd["username"])
+                except CustomUserModel.DoesNotExist:
+                    pass
             if user_field:
                 user = authenticate(
                     request, username=user_field.email, password=cd["password"]

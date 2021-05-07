@@ -1,23 +1,37 @@
 {% extends "blog/base.html" %}
 {% load blog_tags %}
+{% load static%}
 
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
 
 <div class="contents-detail">
-<div class="main-contents">
-    <div class="details-body">
-        <h1>{{ post.title }}</h1>
-        <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
-        {{ post.body|markdown_tag }}
-        {% if request.user == post.author %}
-        <form action="{% url "blog:edit_post" post.id %}" method="GET">
-          <button class="send-btn" name="action" value="edit_form" type="submit">Edit</button>
-          <button class="send-btn" name="action" value="delete" type="submit">Delete</button>
-        </form>
-        {% endif %}
-    </div>
+  <div class="main-contents">
+    <div class="main-content-wrapper">
+      <div class="wrap-main-body">
+        <div class="details-body">
+            <h1>{{ post.title }}</h1>
+            <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
+            {{ post.body|markdown_tag }}
+            {% if request.user == post.author %}
+            <div class="detail-form">
+              <form action="{% url "blog:edit_post" post.id %}" method="GET">
+                <button class="send-btn" name="action" value="edit_form" type="submit">Edit</button>
+                <button class="send-btn" name="action" value="delete" type="submit">Delete</button>
+              </form>
+            </div>
+            {% endif %}
+         </div>
+        </div>
+        <div class="detail-image">
+            {% if post.image %}
+                <img src="{{ post.image.url }}">
+            {% else %}
+                <img src="{% static "images/no-image-png-2.png" %}" alt="no image">
+            {% endif %}
+         </div>
+      </div>
     </div>
     
     <div class="similar-post">
