@@ -34,8 +34,16 @@ def user_login(request):
                     else:
                         return HttpResponse("Disabled account")
                 else:
-                    print(request.session)
+                    num_attempts = (request.session.get("attempts", 0)) + 1
+                    request.session["attempts"] = num_attempts
                     messages.error(request, f"Incorrect password")
+                    print(request.session["attempts"])
+                    if num_attempts == 3:
+                        request.session["attempts"] = 0
+                        messages.error(
+                            request, f"Incorrect password Your account is locked"
+                        )
+                        return render(request, "account/login.html", {"form": form})
                     return render(request, "account/login.html", {"form": form})
             else:
                 messages.error(

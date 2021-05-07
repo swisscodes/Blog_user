@@ -2,3 +2,28 @@
 __pycache__/
 db.sqlite3
 /node_modules
+/my_blog/media/
+*.pycod[]
+*$py.class
+
+# Installer logs
+pip-log.text
+pip-delete-this-directory.txt
+
+
+#Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+*.cover
+
+
+#Django stuffs
+*log
+
+# Sphinx Documentation
+docs/_build/#PyBuilder
+target
