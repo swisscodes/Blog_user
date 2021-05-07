@@ -20,4 +20,4 @@ Thank you.
 
 
 
-![page-sample](https://github.com/swisscodes/Blog_user/blob/master/blog.gif)
+![page-sample](https://github.com/swisscodes/Blog_user/blob/master/blog1.gif)
